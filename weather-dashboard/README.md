@@ -78,7 +78,7 @@ locally, `git status` won't show it as changed — just don't run
 | Weather API integration (`weatherService.js`) | Teammate | 🔲 TODO |
 | Frontend interactivity (wiring components to `weatherApi.js`) | Teammate | 🔲 TODO |
 | Deployment | Teammate | 🔲 TODO |
-| Documentation | Teammate | 🔲 TODO |
+| Documentation | Teammate | ✅ Done 
 
 Every stub file with a `TODO (Teammate - ...)` comment marks a spot meant to be
 filled in next.
