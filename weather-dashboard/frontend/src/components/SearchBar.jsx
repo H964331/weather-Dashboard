@@ -1,12 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-// TODO (Teammate - frontend interactivity): consider debounced
-// autocomplete suggestions here once a real API is wired up.
-function SearchBar({ onSearch }) {
-  const [value, setValue] = useState('');
+function SearchBar({ city, isLoading, onSearch }) {
+  const [value, setValue] = useState(city);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  useEffect(() => {
+    setValue(city);
+  }, [city]);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
     if (value.trim()) {
       onSearch(value.trim());
     }
@@ -14,17 +16,23 @@ function SearchBar({ onSearch }) {
 
   return (
     <form className="search-bar" onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="Search for a city..."
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-        className="search-bar__input"
-        aria-label="City name"
-      />
-      <button type="submit" className="search-bar__button">
-        Search
-      </button>
+      <label className="search-bar__label" htmlFor="city-search">
+        Search city
+      </label>
+      <div className="search-bar__controls">
+        <input
+          id="city-search"
+          type="text"
+          placeholder="Try London, Chennai, Tokyo..."
+          value={value}
+          onChange={(event) => setValue(event.target.value)}
+          className="search-bar__input"
+          aria-label="City name"
+        />
+        <button type="submit" className="search-bar__button" disabled={isLoading}>
+          {isLoading ? 'Loading...' : 'Search'}
+        </button>
+      </div>
     </form>
   );
 }
